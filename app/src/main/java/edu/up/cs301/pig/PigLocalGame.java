@@ -59,7 +59,7 @@ public class PigLocalGame extends LocalGame {
         if(action instanceof PigRollAction) {
             int run = pgs.getRunTotal();
             Random diceGen = new Random();
-            pgs.setDiceValue(diceGen.nextInt(5) + 1); // maybe 6?
+            pgs.setDiceValue(diceGen.nextInt(6) + 1); // maybe 6?
             int value = pgs.getDiceValue();
             if(value != 1) {
                 run += value;
@@ -102,7 +102,7 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         //TODO  You will implement this method
-        PigGameState copy = pgs;
+        PigGameState copy = new PigGameState(pgs);
         p.sendInfo(copy);
     }//sendUpdatedSate
     /**
@@ -115,12 +115,12 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         //TODO  You will implement this method
-        if(pgs.getPlayer1Score() >= 50) {
-            return "Game! This game's winner is...Player 1 with a score of " + pgs.getPlayer1Score()
+        if(pgs.getPlayer0Score() >= 50) {
+            return "Game! This game's winner is...Player 1 with a score of " + pgs.getPlayer0Score()
                     + " !";
         }
-        else if(pgs.getPlayer0Score() >= 50) {
-            return  "Game! This game's winner is...Player 2 with a score of " + pgs.getPlayer0Score()
+        else if(pgs.getPlayer1Score() >= 50) {
+            return  "Game! This game's winner is...Player 2 with a score of " + pgs.getPlayer1Score()
                     + " !";
         }
         return null;
